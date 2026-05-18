@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stage 2 — Organ Systems · Group 221</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&family=Courier+New&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-light: #f4f7f6;
+      --blue-dark: #0a2540;
+      --blue-mid: #20639b;
+      --blue-light: #f0f4f8;
+      --blue-accent: #007bc3;
+      --text-dark: #1c2a38;
+      --text-muted: #627d98;
+      --border: #bcccdc;
+      --white: #ffffff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-light);
+      color: var(--text-dark);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--blue-dark);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      min-height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--blue-accent);
+    }
+    .nav-logo {
+      font-family: monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 2rem;
+    }
+    .nav-links { display: flex; flex-wrap: wrap; list-style: none; }
+    .nav-links li a {
+      display: block;
+      padding: 0 1rem;
+      line-height: 60px;
+      color: #bcccdc;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .nav-links li a:hover, .nav-links li a.active {
+      color: var(--white);
+      background: rgba(0, 123, 195, 0.3);
+    }
+
+    /* PAGES */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* HERO */
+    .hero {
+      background: var(--blue-dark);
+      color: var(--white);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--blue-accent);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--blue-accent); }
+    .hero p { color: #bcccdc; max-width: 600px; margin: 0 auto 1.5rem; font-size: 1.1rem; }
+    .hero-meta {
+      margin-top: 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding-top: 1.5rem;
+      border-top: 1px solid #103458;
+    }
+    .hero-meta-item { font-size: 0.8rem; color: #829ab1; text-transform: uppercase; }
+    .hero-meta-item strong { display: block; color: var(--white); margin-bottom: 0.2rem; }
+
+    /* SECTION LAYOUT */
+    .section { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; background: var(--white); border: 1px solid var(--border); margin-top: 2rem; margin-bottom: 2rem; border-radius: 6px; }
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-h {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 0.5rem;
+    }
+    .section-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; font-style: italic; }
+    hr.div { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    /* PROSE */
+    .prose p { margin-bottom: 1rem; }
+    .prose h2 {
+      font-size: 1.2rem;
+      color: var(--blue-mid);
+      margin: 1.5rem 0 0.5rem;
+      border-bottom: 2px solid var(--blue-light);
+      padding-bottom: 0.3rem;
+    }
+    .prose ul { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .prose li { margin-bottom: 0.4rem; }
+    .prose b { color: var(--blue-dark); }
+    .prose em { color: var(--blue-accent); font-style: italic; }
+
+    /* BOX */
+    .box {
+      background: var(--blue-light);
+      border-left: 4px solid var(--blue-mid);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .box p { margin: 0; font-weight: 600; color: var(--blue-dark); }
+
+    /* CARDS */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+    .card h3 {
+      font-size: 0.95rem;
+      color: var(--blue-dark);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.2rem;
+    }
+    .card p { font-size: 0.9rem; color: var(--text-dark); }
+
+    /* TABLE */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1.2rem; }
+    .data-table th {
+      background: var(--blue-dark);
+      color: var(--white);
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+    .data-table td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+    .data-table tr:nth-child(even) td { background: var(--blue-light); }
+
+    /* FLOWCHART */
+    .flowchart {
+      background: var(--blue-light);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 6px;
+    }
+    .flow-step {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue-accent);
+      padding: 0.5rem 1.5rem;
+      font-size: 0.9rem;
+      color: var(--blue-dark);
+      text-align: center;
+      min-width: 250px;
+      border-radius: 4px;
+    }
+    .flow-arrow { color: var(--blue-mid); font-weight: bold; font-size: 1.2rem; line-height: 1.5; }
+
+    /* CODE BLOCKS */
+    pre {
+      background: #0f172a;
+      padding: 1rem;
+      overflow-x: auto;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      margin-top: 1rem;
+      border-radius: 6px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .kw { color: #38bdf8; font-weight: bold; }
+    .fn { color: #4ade80; }
+    .cm { color: #64748b; font-style: italic; }
+
+    /* TEAM GRID */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .member {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+      border-radius: 4px;
+      border-top: 4px solid var(--blue-mid);
+    }
+    .member-avatar {
+      width: 48px; height: 48px;
+      background: var(--blue-light);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: var(--blue-dark);
+      margin-bottom: 0.8rem;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+    }
+    .member-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      object-position: top;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+    .member h3 { font-size: 1rem; color: var(--blue-dark); margin-bottom: 0.2rem; }
+    .member-role { font-size: 0.75rem; color: var(--blue-accent); font-weight: bold; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .member p { font-size: 0.88rem; color: var(--text-dark); }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      background: var(--blue-mid);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      border-radius: 4px;
+    }
+    .btn:hover { background: var(--blue-dark); }
+
+    /* TIMELINE */
+    .timeline { margin-top: 1.5rem; }
+    .tl-item { display: flex; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--blue-light); }
+    .tl-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--blue-accent);
+      min-width: 2.5rem;
+    }
+    .tl-content h3 { font-size: 1rem; color: var(--blue-dark); margin-bottom: 0.3rem; text-transform: uppercase; }
+    .tl-content p { font-size: 0.9rem; color: var(--text-dark); }
+
+    /* TAGS */
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.75rem;
+      background: var(--blue-light);
+      border: 1px solid var(--border);
+      color: var(--blue-dark);
+      margin: 0.2rem;
+      border-radius: 4px;
+    }
+
+    /* IMAGE CONTAINERS */
+    .img-block { margin: 1.5rem 0; text-align: center; }
+    .img-block img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .img-block figcaption {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">CIDEB · Team 5</div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="show('home')" id="nav-home" class="active">Home</a></li>
+    <li><a href="#" onclick="show('research')" id="nav-research">Research Data</a></li>
+    <li><a href="#" onclick="show('problem')" id="nav-problem">Problems</a></li>
+    <li><a href="#" onclick="show('robot')" id="nav-robot">Robotic Solution</a></li>
+    <li><a href="#" onclick="show('programming')" id="nav-programming">Programming</a></li>
+    <li><a href="#" onclick="show('journey')" id="nav-journey">Journey</a></li>
+    <li><a href="#" onclick="show('conclusion')" id="nav-conclusion">Conclusion</a></li>
+    <li><a href="#" onclick="show('team')" id="nav-team">Team</a></li>
+  </ul>
+</nav>
+
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">CIDEB · Stage 2 · Learning Evidence 2.3</div>
+      <h1><span>Muscular</span> System<br/>and Myositis</h1>
+      <p>Sequential Programming Structures applied to the study of the muscular system and the design of a robot simulating medical treatments for muscular disorders.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><strong>Group</strong>221</div>
+        <div class="hero-meta-item"><strong>Team</strong>5</div>
+        <div class="hero-meta-item"><strong>Date</strong>February 25, 2026</div>
+        <div class="hero-meta-item"><strong>Category</strong>Organs &amp; Systems</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <p class="section-label">Welcome</p>
+    <h2 class="section-h">Project Overview</h2>
+    <p class="section-sub">Sequential Programming · Muscular System · Robotics</p>
+    <div class="prose">
+      <p>In this project stage, we completed a detailed investigation regarding the <b>muscular system</b>, including its vital functions, critical disorders, and how automated robotic systems can simulate clinical tracking and local treatments.</p>
+      <p>Our team selected <b>Myositis</b> as the central health condition. We developed a custom physical track modeling the body layout, and carefully calibrated a mobile robot to traverse specified checkpoints using structured sequential scripts without branch conditions.</p>
+    </div>
+    
+    <div class="card-grid">
+      <div class="card">
+        <h3>Research Data</h3>
+        <p>In-depth analysis of systemic muscular layouts, dynamic tissue functions, and standard anatomical categorizations.</p>
+      </div>
+      <div class="card">
+        <h3>Health Problems</h3>
+        <p>Focusing on Myositis—a severe, immune-driven tissue inflammation leading to chronic physical exhaustion and localized degradation.</p>
+      </div>
+      <div class="card">
+        <h3>Robotic Solution</h3>
+        <p>A customizable physical vehicle configured with direct sequence routines to navigate tracks and mock real-time medicine deployment.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-research">
+  <div class="section">
+    <p class="section-label">01 — Research Data</p>
+    <h1 class="section-h">The Muscular System</h1>
+    <p class="section-sub">Systemic functions, major structural tissues, and metabolic balance</p>
+
+    <div class="prose">
+      <p>The human muscular system is absolutely critical to body functionality, offering required <b>locomotion, structural support, tissue protection</b>, and metabolic heat stabilization. Without unified active fiber contraction, basic conscious responses cannot happen.</p>
+      <p>Healthy individuals present more than <b>600 unique muscles</b>, making up roughly 40% of standard body mass indices. These are classified structurally as skeletal, smooth, or cardiac tissues.</p>
+
+      <h2>Core Functions</h2>
+      <ul>
+        <li><b>Locomotion:</b> Skeletal muscle chains pull bone joints across physical planes.</li>
+        <li><b>Postural Balance:</b> Tonic contractions keep structural alignment stable despite gravity.</li>
+        <li><b>Thermal Release:</b> Continuous cellular friction safely elevates heat production during high exertion.</li>
+        <li><b>Vascular Flow:</b> Cardiac tissue drives continuous distribution of vital oxygenated blood.</li>
+        <li><b>Visceral Transport:</b> Smooth layers facilitate peristaltic movement through the digestive tract.</li>
+      </ul>
+
+      <h2>Anatomical Mapping</h2>
+      <p>To support the validation of our physical scenario, we successfully identified, labeled, and placed key structural muscle nodes onto our tracking layout:</p>
+    </div>
+
+    <div class="img-block">
+      <figure>
+        <img src="/mnt/user-data/uploads/Captura_de_pantalla_2026-05-18_113748.png" alt="Muscular system map"/>
+        <figcaption>Fig. 1 — Muscular System track diagram mapped and labeled by Team 5</figcaption>
+      </figure>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr><th>Muscle Group</th><th>Anatomical Zone</th><th>Primary Biomechanical Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Deltoid</td><td>Shoulder girdle</td><td>Humeral abduction and elevation</td></tr>
+        <tr><td>Pectoralis major</td><td>Anterior chest wall</td><td>Arm adduction and internal rotation</td></tr>
+        <tr><td>Rectus abdominis</td><td>Abdominal core</td><td>Vertebral column flexion</td></tr>
+        <tr><td>Biceps brachii</td><td>Anterior upper arm</td><td>Elbow flexion and forearm supination</td></tr>
+        <tr><td>Quadriceps femoris</td><td>Anterior thigh</td><td>Knee joint extension</td></tr>
+        <tr><td>Adductor longus</td><td>Medial thigh</td><td>Femoral adduction</td></tr>
+        <tr><td>Vastus medialis / lateralis</td><td>Thigh region</td><td>Patellar path stabilization</td></tr>
+        <tr><td>Gracilis</td><td>Medial thigh border</td><td>Hip adduction and minor leg flexion</td></tr>
+        <tr><td>Digital flexors</td><td>Volar forearm / hand</td><td>Phalangeal flexion and grip retention</td></tr>
+        <tr><td>Trapezius</td><td>Posterior cervical / thoracic</td><td>Scapular elevation and rotation</td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:2rem;">
+      <p style="font-size:0.8rem; font-weight:bold; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.5rem;">Academic References &amp; Bibliography</p>
+      <a class="btn" href="https://www.khanacademy.org/science/biology" target="_blank">Khan Academy – Biology ↗</a>
+      <a class="btn" href="https://www.who.int/health-topics" target="_blank" style="margin-left:0.5rem;">WHO ↗</a>
+      <a class="btn" href="https://www.ncbi.nlm.nih.gov/" target="_blank" style="margin-left:0.5rem;">NCBI PubMed ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-problem">
+  <div class="section">
+    <p class="section-label">02 — Problems</p>
+    <h1 class="section-h">Myositis Pathology</h1>
+    <p class="section-sub">Chronic cellular inflammation caused by autoimmune deregulation</p>
+
+    <div class="box">
+      <p>Problem Statement: Myositis references a complex group of long-term muscle inflammations where active defense systems mistakenly target healthy fibers, precipitating extreme fatigue and muscle breakdown.</p>
+    </div>
+
+    <div class="prose">
+      <h2>Understanding Myositis</h2>
+      <p>Myositis covers a specialized spectrum of inflammatory myopathies. Due to faulty immune signaling, white blood cells recognize normal muscle cells as foreign components, initiating tissue destruction and ongoing inflammation.</p>
+
+      <h2>Primary Manifestations</h2>
+      <ul>
+        <li><b>Progressive motor weakness</b>, deeply concentrated in proximal regions like shoulders and hips.</li>
+        <li><b>Profound systemic exhaustion</b> that alters simple daily schedules.</li>
+        <li><b>Persistent localized pain</b> and noticeable swelling across damaged zones.</li>
+        <li>Severe swallowing complications (in highly advanced clinical stages).</li>
+        <li>Dermatological markings or violet rashes across eyelids and finger joints.</li>
+      </ul>
+
+      <h2>Pathological Variations</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Polymyositis</h3>
+        <p>Spreads symmetrically across multiple proximal muscle sets. It typically develops in adult cohorts between 30 and 60 years of age.</p>
+      </div>
+      <div class="card">
+        <h3>Dermatomyositis</h3>
+        <p>Presents identical muscle damage profile but includes conspicuous, inflammatory skin eruptions along the face and hands.</p>
+      </div>
+      <div class="card">
+        <h3>Inclusion Body Myositis</h3>
+        <p>A slowly advancing variant that generates gradual atrophy in distal areas, specifically targeting wrist flexors and quadriceps.</p>
+      </div>
+    </div>
+
+    <div class="prose" style="margin-top:2rem;">
+      <h2>Global Epidemiology</h2>
+      <ul>
+        <li>Presents an incidence rate of approximately <b>1 case per 100,000 individuals</b> annually.</li>
+        <li>Demonstrates a clear gender bias, showing a 2:1 higher frequency in female demographics.</li>
+        <li>Currently lacks an absolute cure; medical plans focus on suppressing the immune response.</li>
+        <li>Early diagnostic validation yields drastically better long-term preservation outcomes.</li>
+      </ul>
+
+      <h2>Application Connection</h2>
+      <p>Our programmed hardware acts as a miniature clinical vehicle moving through a mapped muscular system, identifying inflamed nodes to show how advanced medical nano-agents could treat inflammation locally.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-robot">
+  <div class="section">
+    <p class="section-label">03 — Robotic Solution</p>
+    <h1 class="section-h">Vehicle Configuration</h1>
+    <p class="section-sub">Design principles, integrated modules, and track functionality</p>
+
+    <div class="prose">
+      <p>The robotic platform consists of a multi-wheel programmable mobile base that traverses coordinates on our muscular model. It includes an on-board processing controller, DC geared motors, and diagnostic markers.</p>
+    </div>
+
+    <div class="img-block">
+      <figure>
+        <img src="/mnt/user-data/uploads/Captura_de_pantalla_2026-05-18_113759.png" alt="Robot configuration"/>
+        <figcaption>Fig. 2 — Mobile robot platform utilized by Team 5 during active stage evaluations</figcaption>
+      </figure>
+    </div>
+    <div class="box">
+      <p>Design Principle: The platform follows a hardcoded path using explicit sequential steps. Every execution step mimics a therapeutic microrobot hunting down cellular lesions inside an active organ.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Controller Unit</h3>
+        <p>Main onboard microprocessor that coordinates runtime execution of instructions without logical branch delays.</p>
+      </div>
+      <div class="card">
+        <h3>DC Drive Motors</h3>
+        <p>Dual direct-current motors managing differential rotation for straight trajectories and exact turning points.</p>
+      </div>
+      <div class="card">
+        <h3>4-Wheel Chassis</h3>
+        <p>A simple, rigid support base that minimizes physical drift or balance disruptions during physical testing.</p>
+      </div>
+      <div class="card">
+        <h3>USB Interface</h3>
+        <p>Provides quick script upload from compiler terminals straight into non-volatile memory chips.</p>
+      </div>
+    </div>
+
+    <hr class="div"/>
+    <table class="data-table">
+      <thead><tr><th>System Parameter</th><th>Technical Specification</th></tr></thead>
+      <tbody>
+        <tr><td>Platform Classification</td><td>Programmable wheeled mobile robot</td></tr>
+        <tr><td>Processing Control</td><td>Onboard microcontroller board</td></tr>
+        <tr><td>Actuation System</td><td>Geared DC motors (2 powered wheels)</td></tr>
+        <tr><td>Control Layout</td><td>Strict sequential step structures</td></tr>
+        <tr><td>Operating Area</td><td>Anatomical muscular system track</td></tr>
+        <tr><td>Target Objective</td><td>Simulated local Myositis treatment</td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top:1.5rem;">
+      <span class="tag">Robotics</span>
+      <span class="tag">Sequential Control</span>
+      <span class="tag">Microcontrollers</span>
+      <span class="tag">DC Actuators</span>
+      <span class="tag">Medical Simulation</span>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-programming">
+  <div class="section">
+    <p class="section-label">04 — Programming</p>
+    <h1 class="section-h">Algorithm &amp; Implementation</h1>
+    <p class="section-sub">Navigation script, process mapping, and sequential structures</p>
+
+    <div class="prose">
+      <p>The system relies fully on <b>sequential programming structures</b>. The code evaluates operations line-by-line in a fixed sequence. This setup provides predictable control paths through the target track map.</p>
+    </div>
+
+    <div class="img-block">
+      <figure>
+        <img src="/mnt/user-data/uploads/Captura_de_pantalla_2026-05-18_113759.png" alt="Robot processing and programming configuration"/>
+        <figcaption>Fig. 3 — Hardware setup and interface tracking routines designed by Team 5</figcaption>
+      </figure>
+    </div>
+    <pre><code><span class="cm">// Team 5 Robot — Sequential Track Navigation</span>
+<span class="cm">// Stage 2: Muscular System Arena · Group 221</span>
+
+<span class="kw">START</span>
+  <span class="fn">INITIALIZE</span> motors, sensors
+
+  <span class="cm">// Phase 1: Enter the muscular system map</span>
+  <span class="fn">MOVE_FORWARD</span>(distance = 30cm)
+  <span class="fn">TURN_RIGHT</span>(angle = 90°)
+  <span class="fn">MOVE_FORWARD</span>(distance = 20cm)
+
+  <span class="cm">// Phase 2: Identify inflamed tissue zone (Myositis)</span>
+  <span class="fn">STOP_ALL_MOTORS</span>()
+  <span class="fn">TRIGGER_SIGNAL</span>()    <span class="cm">// LED/Buzzer indicators show target zone</span>
+  <span class="fn">WAIT_DELAY</span>(time = 2s)
+
+  <span class="cm">// Phase 3: Deliver treatment simulation</span>
+  <span class="fn">MOVE_FORWARD</span>(distance = 15cm)
+  <span class="fn">TURN_LEFT</span>(angle = 90°)
+  <span class="fn">MOVE_FORWARD</span>(distance = 25cm)
+
+  <span class="cm">// Phase 4: Exit track zone</span>
+  <span class="fn">TURN_RIGHT</span>(angle = 90°)
+  <span class="fn">MOVE_FORWARD</span>(distance = 20cm)
+  <span class="fn">STOP_ALL_MOTORS</span>()
+<span class="kw">END</span></code></pre>
+
+    <hr class="div"/>
+    <p style="font-size:0.8rem; font-weight:bold; text-transform:uppercase; color:var(--text-muted); margin-bottom:1rem;">Process Flowchart</p>
+    <div class="flowchart">
+      <div class="flow-step">▶ START — Initialize System Hardware</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Move Forward 30 cm</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Turn Right 90°</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Move Forward 20 cm</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Halt — Trigger Detection Notification</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Hold Position 2 Seconds</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Move Forward 15 cm — Turn Left 90°</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Move Forward 25 cm — Turn Right 90°</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">Move Forward 20 cm</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step" style="border-left-color: var(--blue-dark);">⏹ END — Mission Termination</div>
+    </div>
+
+    <hr class="div"/>
+    <div class="prose">
+      <h2>AI Prompts Utilized</h2>
+      <ul>
+        <li><em>"Explain what Myositis is and how it affects the muscular system."</em></li>
+        <li><em>"What are the most important muscles of the human body and their functions?"</em></li>
+        <li><em>"Write sequential pseudocode for a robot to navigate a medical scenario."</em></li>
+        <li><em>"How can a robot simulate the treatment of a muscular disease?"</em></li>
+        <li><em>"Create a school project website about the muscular system and robotics."</em></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-journey">
+  <div class="section">
+    <p class="section-label">05 — Journey</p>
+    <h1 class="section-h">Evaluation Milestones</h1>
+    <p class="section-sub">From foundational text review to final track deployment</p>
+
+    <div class="prose">
+      <p>Our track development represents a continuous learning experience. Each milestone helped refine our collaborative workflows, resolve integration errors, and bridge software architecture with anatomical facts.</p>
+    </div>
+
+    <div class="img-block">
+      <figure>
+        <img src="/mnt/user-data/uploads/S2A3G221T_5_PDF_Poster.png" alt="Official Stage 2 Poster"/>
+        <figcaption>Fig. 4 — Official Stage 2 academic validation poster generated by Team 5</figcaption>
+      </figure>
+    </div>
+    <hr class="div"/>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-num">01</div>
+        <div class="tl-content">
+          <h3>Phase 1 — Preliminary Analysis</h3>
+          <p>Isolated functional muscle systems as our target topic. Assessed structural vulnerabilities and selected Myositis due to its complex immune characteristics.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">02</div>
+        <div class="tl-content">
+          <h3>Phase 2 — Layout Verification &amp; Scripting</h3>
+          <p>Constructed a physical tracking surface complete with proper muscle node labels. Tested linear instruction paths using hardcoded timelines to stabilize physical motion variations.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-num">03</div>
+        <div class="tl-content">
+          <h3>Phase 3 — Regional Presentation</h3>
+          <p>The mobile hardware completed the track layout within runtime parameters. Delivered our project thesis and structural data to review boards for critique.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-conclusion">
+  <div class="section">
+    <p class="section-label">06 — Conclusion</p>
+    <h1 class="section-h">Team Reflections</h1>
+    <p class="section-sub">Individual and collective takeaways</p>
+
+    <div class="team-grid">
+      
+      <div class="member">
+        <div class="member-avatar">EB</div>
+        <h3>Erick Daniel Bazaldua Villalobos</h3>
+        <div class="member-role">Team Leader</div>
+        <p><em>"This project proved how closely engineering and biology interconnect. Organizing tasks and seeing our work come together on the track was an incredible experience."</em></p>
+      </div>
+      
+      <div class="member">
+        <img class="member-img" src="/mnt/user-data/uploads/image_df1224.jpg" alt="Ian Alejandro Mireles González"/>
+        <h3>Ian Alejandro Mireles González</h3>
+        <div class="member-role">Lead Programmer</div>
+        <p><em>"Building sequential robot behaviors taught me how basic instructions generate complex, predictable paths. Programming logic is a powerful tool."</em></p>
+      </div>
+      
+      <div class="member">
+        <img class="member-img" src="/mnt/user-data/uploads/image_df127d.jpg" alt="Natalia Isadora Santillán Rodríguez"/>
+        <h3>Natalia Isadora Santillán Rodríguez</h3>
+        <div class="member-role">Lead Researcher</div>
+        <p><em>"Studying Myositis showed me how severe rare autoimmune conditions can be. Scientific analysis helps us interpret exactly what the human body undergoes."</em></p>
+      </div>
+      
+      <div class="member">
+        <img class="member-img" src="/mnt/user-data/uploads/WhatsApp_Image_2026-05-18_at_12.13.55_PM.jpeg" alt="Victoria Heras Hanyecz"/>
+        <h3>Victoria Heras Hanyecz</h3>
+        <div class="member-role">Hardware Designer</div>
+        <p><em>"Building the muscle tracking map was a great creative challenge. Seeing the robot navigate it proved that form and function work together."</em></p>
+      </div>
+      
+      <div class="member">
+        <img class="member-img" src="/mnt/user-data/uploads/image_df1244.jpg" alt="Sofía Aimar Méndez Martínez"/>
+        <h3>Sofía Aimar Méndez Martínez</h3>
+        <div class="member-role">Researcher / Speaker</div>
+        <p><em>"This experience taught me to stay focused under pressure and trust my team. Plus, I now understand the muscular system in a much more practical way."</em></p>
+      </div>
+      
+      <div class="member">
+        <img class="member-img" src="/mnt/user-data/uploads/image_df1229.jpg" alt="Paola Maya Aguilar"/>
+        <h3>Paola Maya Aguilar</h3>
+        <div class="member-role">Technical Writer</div>
+        <p><em>"Logging every step taught me how vital project documentation really is. Discoveries mean very little unless they are clearly shared with others."</em></p>
+      </div>
+      
+    </div>
+    <hr class="div"/>
+    <div class="prose">
+      <h2>General Project Summary</h2>
+      <p>Our team concludes that <b>medical robotics holds massive potential</b> to change how we track and manage conditions like Myositis. The principles we used—sequential movement, targeted stop zones, and automated actions—serve as the foundation for real surgical technologies in development today.</p>
+      <p>This project achieved all its core goals: we analyzed an organ system in detail, addressed a real health issue, built an accurate testing track, and successfully guided our robot through it.</p>
+      <p style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:2rem;">— Science begins with a question. Technology builds the solution. —</p>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-team">
+  <div class="section">
+    <p class="section-label">07 — Team Profile</p>
+    <h1 class="section-h">Team 5 Roster</h1>
+    <p class="section-sub">Group 221 · CIDEB · Universidad Autónoma de Nuevo León</p>
+
+    <table class="data-table">
+      <thead>
+        <tr><th>Index</th><th>Student Name</th><th>Roster ID</th><th>Assigned Core Role</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01</td><td><b>Erick Daniel Bazaldua Villalobos</b></td><td>2278807</td><td>Team Leader</td></tr>
+        <tr><td>02</td><td><b>Ian Alejandro Mireles González</b></td><td>2279343</td><td>Lead Programmer</td></tr>
+        <tr><td>03</td><td><b>Natalia Isadora Santillán Rodríguez</b></td><td>2278805</td><td>Lead Researcher</td></tr>
+        <tr><td>04</td><td><b>Victoria Heras Hanyecz</b></td><td>2279449</td><td>Hardware Designer</td></tr>
+        <tr><td>05</td><td><b>Sofía Aimar Méndez Martínez</b></td><td>2279171</td><td>Researcher / Speaker</td></tr>
+        <tr><td>06</td><td><b>Paola Maya Aguilar</b></td><td>2279251</td><td>Technical Writer</td></tr>
+      </tbody>
+    </table>
+
+    <hr class="div"/>
+    <div class="card-grid">
+      <div class="card">
+        <h3>// Context Information</h3>
+        <p style="margin-top: 0.5rem;"><b>Assigned Team:</b> 5</p>
+        <p><b>Academic Group:</b> 221</p>
+        <p><b>Institution:</b> CIDEB — UANL</p>
+        <p><b>Evaluation Stage:</b> 2 — Sequential Routines</p>
+        <p><b>Evidence Item:</b> 2.3 — Anatomical Track Challenge</p>
+        <p><b>Submission Date:</b> February 25, 2026</p>
+      </div>
+      <div class="card">
+        <h3>// Completed Tasks</h3>
+        <p style="margin-top: 0.5rem;"><b>✓</b> Comprehensive muscle group structural study</p>
+        <p><b>✓</b> Selection and mapping of Myositis pathology</p>
+        <p><b>✓</b> Assembly of the physical tracking board</p>
+        <p><b>✓</b> Validation of the sequential navigation script</p>
+        <p><b>✓</b> Successful track completion run without errors</p>
+        <p><b>✓</b> Project documentation site finalized</p>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <span class="tag">Biology</span>
+      <span class="tag">Robotics</span>
+      <span class="tag">Sequential Routines</span>
+      <span class="tag">CIDEB</span>
+      <span class="tag">UANL</span>
+      <span class="tag">Teamwork</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.getElementById('nav-' + id).classList.add('active');
+    window.scrollTo({ top: 0 });
+    return false;
+  }
+</script>
+</body>
+</html>
