@@ -199,7 +199,7 @@
       font-size: 0.9rem;
       color: var(--blue-dark);
       text-align: center;
-      min-width: 250px;
+      min-width: 280px;
       border-radius: 4px;
     }
     .flow-arrow { color: var(--blue-mid); font-weight: bold; font-size: 1.2rem; line-height: 1.5; }
@@ -310,7 +310,6 @@
   </ul>
 </nav>
 
-<!--HOME-->
 <div class="page active" id="page-home">
   <div class="hero">
     <div class="hero-inner">
@@ -351,7 +350,6 @@
   </div>
 </div>
 
-<!--RESEARCH-->
 <div class="page" id="page-research">
   <div class="section">
     <p class="section-label">01 — Research Data</p>
@@ -408,7 +406,6 @@
   </div>
 </div>
 
-<!--PROBLEM-->
 <div class="page" id="page-problem">
   <div class="section">
     <p class="section-label">02 — Problems</p>
@@ -465,7 +462,6 @@
   </div>
 </div>
 
-<!--ROBOTIC SOLUTION-->
 <div class="page" id="page-robot">
   <div class="section">
     <p class="section-label">03 — Robotic Solution</p>
@@ -508,7 +504,6 @@
   </div>
 </div>
 
-<!--PROGRAMMING-->
 <div class="page" id="page-programming">
   <div class="section">
     <p class="section-label">04 — Programming</p>
@@ -551,21 +546,23 @@
     <div class="flowchart">
       <div class="flow-step">▶ START — Initialize System Hardware</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Move Forward 30 cm</div>
+      <div class="flow-step"><b>Function body</b>:<br>DC Motor FF — Delay: 1.5s (Move Forward)</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Turn Right 90°</div>
+      <div class="flow-step">DC Motor FB — Delay: 2.8s (Turn Sequence)</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Move Forward 20 cm</div>
+      <div class="flow-step">DC Motor FF — Delay: 2.0s (Move Forward)</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Halt — Trigger Detection Notification</div>
+      <div class="flow-step">DC Motor 00 — (Halt / Standby)</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Hold Position 2 Seconds</div>
+      <div class="flow-step">🔄 <b>Loop (10 Times) — Action Sequence</b>:<br>• Servo 1 activation<br>• On Ports: 4 & 5 — Delay: 1.0s<br>• Off Ports: 4 & 5<br>• Servo 1 reset — Delay: 1.0s</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Move Forward 15 cm — Turn Left 90°</div>
+      <div class="flow-step">DC Motor BF — Delay: 1.0s</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Move Forward 25 cm — Turn Right 90°</div>
+      <div class="flow-step">DC Motor FF — Delay: 2.0s</div>
       <div class="flow-arrow">↓</div>
-      <div class="flow-step">Move Forward 20 cm</div>
+      <div class="flow-step">DC Motor BF — Delay: 0.7s</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step">DC Motor FF — Delay: 1.0s</div>
       <div class="flow-arrow">↓</div>
       <div class="flow-step" style="border-left-color: var(--blue-dark);">⏹ END — Mission Termination</div>
     </div>
@@ -603,7 +600,6 @@
   </div>
 </div>
   
-<!--CONCLUSIONS-->
 <div class="page" id="page-conclusion">
   <div class="section">
     <p class="section-label">06 — Conclusion</p>
@@ -634,7 +630,7 @@
         <img class="member-img" src="My folder/Victoria.jpeg" alt="Victoria Heras Hanyecz"/>
         <h3>Victoria Heras Hanyecz</h3>
         <div class="member-role">Hardware Designer</div>
-        <p><em>In this stages, I learned and applied coding and programming skills on a platform called rogic.Each coding block served for different actions like for moving forward and bavkwards, open and close the claw , turn on the sensor or led light. We applied this code to solve a problem with  our body system in this case my team has the muscular system we solved the problem of myositis  we programmed the robot tu funcion with a remote control and it enter from the sholder and moved to thr muscle of the leg and performed the action and left. This was performed with the skills we learned as well as the programming skills</em></p>
+        <p><em>In this stages, I learned and applied coding and programming skills on a platform called rogic.Each coding block served for different actions like for moving forward and bavkwards, open and close the claw , turn on the sensor or led light. We applied this code to solve a problem with  our body system in this case my team has the muscular system we solved the problem of myositis  we programmed the robot tu funcion with a remote control and it enter from the sholder and moved to thr muscle of the leg and performed the action and left. This was performed with the skills we learned as well as the programming skills</em></p>
       </div>
       
       <div class="member">
@@ -660,7 +656,6 @@
   </div>
 </div>
 
-<!--TEAM-->
 <div class="page" id="page-team">
   <div class="section">
     <p class="section-label">07 — Team Profile</p>
